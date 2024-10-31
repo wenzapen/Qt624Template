@@ -1,0 +1,24 @@
+{
+    "classes": [
+        {
+            "className": "HotPlugDetector",
+            "object": true,
+            "qualifiedClassName": "HotPlugDetector",
+            "signals": [
+                {
+                    "access": "public",
+                    "name": "audioOutputsChanged",
+                    "returnType": "void"
+                }
+            ],
+            "superClasses": [
+                {
+                    "access": "public",
+                    "name": "QObject"
+                }
+            ]
+        }
+    ],
+    "inputFile": "hotplug.h",
+    "outputRevision": 68
+}

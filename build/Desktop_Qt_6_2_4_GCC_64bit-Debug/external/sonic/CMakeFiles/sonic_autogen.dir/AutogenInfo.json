@@ -1,0 +1,86 @@
+{
+	"BUILD_DIR" : "/home/wen/QtProjects/Qt624Template/build/Desktop_Qt_6_2_4_GCC_64bit-Debug/external/sonic/sonic_autogen",
+	"CMAKE_BINARY_DIR" : "/home/wen/QtProjects/Qt624Template/build/Desktop_Qt_6_2_4_GCC_64bit-Debug",
+	"CMAKE_CURRENT_BINARY_DIR" : "/home/wen/QtProjects/Qt624Template/build/Desktop_Qt_6_2_4_GCC_64bit-Debug/external/sonic",
+	"CMAKE_CURRENT_SOURCE_DIR" : "/home/wen/QtProjects/Qt624Template/external/sonic",
+	"CMAKE_EXECUTABLE" : "/home/wen/Qt/Tools/CMake/bin/cmake",
+	"CMAKE_LIST_FILES" : 
+	[
+		"/home/wen/QtProjects/Qt624Template/external/sonic/CMakeLists.txt",
+		"/home/wen/QtProjects/Qt624Template/build/Desktop_Qt_6_2_4_GCC_64bit-Debug/.qtc/package-manager/auto-setup.cmake",
+		"/home/wen/QtProjects/Qt624Template/build/Desktop_Qt_6_2_4_GCC_64bit-Debug/CMakeFiles/3.29.3/CMakeCCompiler.cmake",
+		"/home/wen/Qt/Tools/CMake/share/cmake-3.29/Modules/CMakeCInformation.cmake",
+		"/home/wen/Qt/Tools/CMake/share/cmake-3.29/Modules/CMakeLanguageInformation.cmake",
+		"/home/wen/Qt/Tools/CMake/share/cmake-3.29/Modules/Compiler/GNU-C.cmake",
+		"/home/wen/Qt/Tools/CMake/share/cmake-3.29/Modules/Compiler/GNU.cmake",
+		"/home/wen/Qt/Tools/CMake/share/cmake-3.29/Modules/Platform/Linux-GNU-C.cmake",
+		"/home/wen/Qt/Tools/CMake/share/cmake-3.29/Modules/Platform/Linux-GNU.cmake",
+		"/home/wen/Qt/Tools/CMake/share/cmake-3.29/Modules/CMakeCommonLanguageInclude.cmake"
+	],
+	"CMAKE_SOURCE_DIR" : "/home/wen/QtProjects/Qt624Template",
+	"CROSS_CONFIG" : false,
+	"DEP_FILE" : "/home/wen/QtProjects/Qt624Template/build/Desktop_Qt_6_2_4_GCC_64bit-Debug/external/sonic/sonic_autogen/deps",
+	"DEP_FILE_RULE_NAME" : "sonic_autogen/timestamp",
+	"HEADERS" : 
+	[
+		[
+			"/home/wen/QtProjects/Qt624Template/external/sonic/sonic.h",
+			"Mu",
+			"EWIEGA46WW/moc_sonic.cpp",
+			null
+		]
+	],
+	"HEADER_EXTENSIONS" : [ "h", "hh", "h++", "hm", "hpp", "hxx", "in", "txx" ],
+	"INCLUDE_DIR" : "/home/wen/QtProjects/Qt624Template/build/Desktop_Qt_6_2_4_GCC_64bit-Debug/external/sonic/sonic_autogen/include",
+	"MOC_COMPILATION_FILE" : "/home/wen/QtProjects/Qt624Template/build/Desktop_Qt_6_2_4_GCC_64bit-Debug/external/sonic/sonic_autogen/mocs_compilation.cpp",
+	"MOC_DEFINITIONS" : [],
+	"MOC_DEPEND_FILTERS" : 
+	[
+		[
+			"Q_PLUGIN_METADATA",
+			"[\n][ \t]*Q_PLUGIN_METADATA[ \t]*\\([^\\)]*FILE[ \t]*\"([^\"]+)\""
+		]
+	],
+	"MOC_INCLUDES" : 
+	[
+		"/usr/include/c++/9",
+		"/usr/include/x86_64-linux-gnu/c++/9",
+		"/usr/include/c++/9/backward",
+		"/usr/lib/gcc/x86_64-linux-gnu/9/include",
+		"/usr/local/include",
+		"/usr/include/x86_64-linux-gnu",
+		"/usr/include"
+	],
+	"MOC_MACRO_NAMES" : [ "Q_OBJECT", "Q_GADGET", "Q_NAMESPACE", "Q_NAMESPACE_EXPORT" ],
+	"MOC_OPTIONS" : [],
+	"MOC_PATH_PREFIX" : false,
+	"MOC_PREDEFS_CMD" : 
+	[
+		"/usr/bin/g++",
+		"-dM",
+		"-E",
+		"-c",
+		"/home/wen/Qt/Tools/CMake/share/cmake-3.29/Modules/CMakeCXXCompilerABI.cpp"
+	],
+	"MOC_PREDEFS_FILE" : "/home/wen/QtProjects/Qt624Template/build/Desktop_Qt_6_2_4_GCC_64bit-Debug/external/sonic/sonic_autogen/moc_predefs.h",
+	"MOC_RELAXED_MODE" : false,
+	"MOC_SKIP" : [],
+	"MULTI_CONFIG" : false,
+	"PARALLEL" : 2,
+	"PARSE_CACHE_FILE" : "/home/wen/QtProjects/Qt624Template/build/Desktop_Qt_6_2_4_GCC_64bit-Debug/external/sonic/CMakeFiles/sonic_autogen.dir/ParseCache.txt",
+	"QT_MOC_EXECUTABLE" : "/home/wen/Qt/6.2.4/gcc_64/./libexec/moc",
+	"QT_UIC_EXECUTABLE" : "",
+	"QT_VERSION_MAJOR" : 6,
+	"QT_VERSION_MINOR" : 2,
+	"SETTINGS_FILE" : "/home/wen/QtProjects/Qt624Template/build/Desktop_Qt_6_2_4_GCC_64bit-Debug/external/sonic/CMakeFiles/sonic_autogen.dir/AutogenUsed.txt",
+	"SOURCES" : 
+	[
+		[
+			"/home/wen/QtProjects/Qt624Template/external/sonic/sonic.c",
+			"Mu",
+			null
+		]
+	],
+	"USE_BETTER_GRAPH" : false,
+	"VERBOSITY" : 0
+}

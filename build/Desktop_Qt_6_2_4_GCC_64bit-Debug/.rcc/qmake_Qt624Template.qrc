@@ -1,0 +1,6 @@
+<RCC>
+  <qresource prefix="/Qt624Template">
+    <file alias="qmldir">/home/wen/QtProjects/Qt624Template/build/Desktop_Qt_6_2_4_GCC_64bit-Debug/Qt624Template/qmldir</file>
+  </qresource>
+</RCC>
+

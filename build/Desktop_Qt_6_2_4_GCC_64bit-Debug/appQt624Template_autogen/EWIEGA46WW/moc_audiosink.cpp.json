@@ -1,0 +1,62 @@
+{
+    "classes": [
+        {
+            "className": "YT20AudioSink",
+            "object": true,
+            "qualifiedClassName": "YT20AudioSink",
+            "signals": [
+                {
+                    "access": "public",
+                    "name": "stateChanged",
+                    "returnType": "void"
+                },
+                {
+                    "access": "public",
+                    "name": "resourceInsufficient",
+                    "returnType": "void"
+                },
+                {
+                    "access": "public",
+                    "name": "signalAudioOutputDeviceListChanged",
+                    "returnType": "void"
+                },
+                {
+                    "access": "public",
+                    "name": "signalDeviceSwitched",
+                    "returnType": "void"
+                }
+            ],
+            "slots": [
+                {
+                    "access": "public",
+                    "name": "onAudioOutputDevicesChanged",
+                    "returnType": "void"
+                },
+                {
+                    "access": "public",
+                    "arguments": [
+                        {
+                            "name": "device",
+                            "type": "QString"
+                        }
+                    ],
+                    "name": "requestDeviceSwitch",
+                    "returnType": "void"
+                },
+                {
+                    "access": "public",
+                    "name": "getCurrentDeviceFormat",
+                    "returnType": "YT20AudioFormat"
+                }
+            ],
+            "superClasses": [
+                {
+                    "access": "public",
+                    "name": "QObject"
+                }
+            ]
+        }
+    ],
+    "inputFile": "audiosink.h",
+    "outputRevision": 68
+}

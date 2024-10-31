@@ -1,0 +1,9 @@
+/home/wen/QtProjects/Qt624Template/build/Desktop_Qt_6_2_4_GCC_64bit-Debug/appQt624Template_autogen/include/../EWIEGA46WW/moc_audiosink.cpp.json
+/home/wen/QtProjects/Qt624Template/build/Desktop_Qt_6_2_4_GCC_64bit-Debug/appQt624Template_autogen/include/../EWIEGA46WW/moc_demuxer.cpp.json
+/home/wen/QtProjects/Qt624Template/build/Desktop_Qt_6_2_4_GCC_64bit-Debug/appQt624Template_autogen/include/../EWIEGA46WW/moc_dispatcher.cpp.json
+/home/wen/QtProjects/Qt624Template/build/Desktop_Qt_6_2_4_GCC_64bit-Debug/appQt624Template_autogen/include/../EWIEGA46WW/moc_fireworks.cpp.json
+/home/wen/QtProjects/Qt624Template/build/Desktop_Qt_6_2_4_GCC_64bit-Debug/appQt624Template_autogen/include/../EWIEGA46WW/moc_framecontroller.cpp.json
+/home/wen/QtProjects/Qt624Template/build/Desktop_Qt_6_2_4_GCC_64bit-Debug/appQt624Template_autogen/include/../EWIEGA46WW/moc_hotplug.cpp.json
+/home/wen/QtProjects/Qt624Template/build/Desktop_Qt_6_2_4_GCC_64bit-Debug/appQt624Template_autogen/include/../EWIEGA46WW/moc_hurricane.cpp.json
+/home/wen/QtProjects/Qt624Template/build/Desktop_Qt_6_2_4_GCC_64bit-Debug/appQt624Template_autogen/include/../EWIEGA46WW/moc_playback.cpp.json
+/home/wen/QtProjects/Qt624Template/build/Desktop_Qt_6_2_4_GCC_64bit-Debug/appQt624Template_autogen/include/../EWIEGA46WW/moc_renderer.cpp.json
