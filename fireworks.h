@@ -101,17 +101,21 @@ protected:
 
         // FFmpeg 解码后的图像数据转换为 QImage
         QImage frameImage;
-        if (firstImage) {
-            frameImage = QImage("test1.jpg");   // 假设 getDecodedFrame() 返回解码后的帧
-            firstImage = !firstImage;
+        // if (firstImage) {
+        //     frameImage = QImage("test1.jpg");   // 假设 getDecodedFrame() 返回解码后的帧
+        //     firstImage = !firstImage;
 
-        } else {
-            frameImage = QImage("test1.jpeg");   // 假设 getDecodedFrame() 返回解码后的帧
-            firstImage = !firstImage;
-        }
+        // } else {
+        //     frameImage = QImage("test1.jpeg");   // 假设 getDecodedFrame() 返回解码后的帧
+        //     firstImage = !firstImage;
+        // }
         // QImage frameImage("test1.jpg");   // 假设 getDecodedFrame() 返回解码后的帧
-        // QImage frameImage = videoFrameRefToQImage(frame);
+        frameImage = videoFrameRefToQImage(frame);
 
+        // 释放旧的纹理（如果存在）
+        if (textureNode->texture()) {
+            delete textureNode->texture();
+        }
         // 创建纹理
         QSGTexture *texture = window()->createTextureFromImage(frameImage);
         textureNode->setTexture(texture);

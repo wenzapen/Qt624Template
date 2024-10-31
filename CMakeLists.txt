@@ -128,7 +128,7 @@ target_link_libraries(appQt624Template
 )
 
 if(WIN32)
-    target_link_libraries(appQt624Template
+    target_link_libraries(appQt624Template PRIVATE
         winmm
         SetupAPI
     )

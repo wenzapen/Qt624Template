@@ -1,0 +1,26 @@
+/****************************************************************************
+** Generated QML type registration code
+**
+** WARNING! All changes made in this file will be lost!
+*****************************************************************************/
+
+#include <QtQml/qqml.h>
+#include <QtQml/qqmlmoduleregistration.h>
+
+#include <fireworks.h>
+#include <hurricane.h>
+
+#if !defined(QT_STATIC)
+#define Q_QMLTYPE_EXPORT Q_DECL_EXPORT
+#else
+#define Q_QMLTYPE_EXPORT
+#endif
+
+Q_QMLTYPE_EXPORT void qml_register_types_Qt624Template()
+{
+    qmlRegisterTypesAndRevisions<Fireworks>("Qt624Template", 1);
+    qmlRegisterTypesAndRevisions<Hurricane>("Qt624Template", 1);
+    qmlRegisterModule("Qt624Template", 1, 0);
+}
+
+static const QQmlModuleRegistration registration("Qt624Template", qml_register_types_Qt624Template);

@@ -1,0 +1,7 @@
+<RCC>
+  <qresource prefix="/Qt624Template/">
+    <file alias="CustomRadioButton.qml">C:/D/QT/Qt624Template/CustomRadioButton.qml</file>
+    <file alias="main.qml">C:/D/QT/Qt624Template/main.qml</file>
+  </qresource>
+</RCC>
+
