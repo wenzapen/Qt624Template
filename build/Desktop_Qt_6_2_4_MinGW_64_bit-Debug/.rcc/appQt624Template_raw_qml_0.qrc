@@ -2,6 +2,8 @@
   <qresource prefix="/Qt624Template/">
     <file alias="CustomRadioButton.qml">C:/D/QT/Qt624Template/CustomRadioButton.qml</file>
     <file alias="main.qml">C:/D/QT/Qt624Template/main.qml</file>
+    <file alias="shader/fragment.fsh">C:/D/QT/Qt624Template/shader/fragment.fsh</file>
+    <file alias="shader/vertex.vsh">C:/D/QT/Qt624Template/shader/vertex.vsh</file>
   </qresource>
 </RCC>
 

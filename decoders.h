@@ -106,6 +106,7 @@ public:
     AVStream *stream = nullptr;
     AVCodecContext *codecCtx = nullptr;
     AVFrame *frameBuf = nullptr;
+    // AVBufferRef *hw_device_ctx = nullptr;
     DecoderContext(AVStream *vs): stream(vs) {
         auto *videoCodecPara = stream->codecpar;
         if (!(codec = const_cast<AVCodec *>(avcodec_find_decoder(videoCodecPara->codec_id)))) {
@@ -114,9 +115,21 @@ public:
         if (!(codecCtx = avcodec_alloc_context3(codec))) {
             throw std::runtime_error("Cannot find valid video decode codec context.");
         }
+
+
         if (avcodec_parameters_to_context(codecCtx, videoCodecPara) < 0) {
             throw std::runtime_error("Cannot initialize videoCodecCtx.");
         }
+
+        // // 创建硬件设备上下文，使用 DXVA2
+        // int err = av_hwdevice_ctx_create(&hw_device_ctx, AV_HWDEVICE_TYPE_DXVA2, NULL, NULL, 0);
+        // if (err < 0) {
+        //     throw std::runtime_error("Failed to create hardware device context: " );
+        // }
+
+        // // 将硬件设备上下文设置到 codecCtx
+        // codecCtx->hw_device_ctx = hw_device_ctx;
+
         if (avcodec_open2(codecCtx, codec, nullptr) < 0) {
             throw std::runtime_error("Cannot open codec.");
         }

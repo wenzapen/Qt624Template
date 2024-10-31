@@ -55,7 +55,7 @@ ApplicationWindow {
                 repeat: false   // Only run once
                 onTriggered: {
                     console.log("2 seconds have passed, executing operation")
-                    videoArea.openFile("../../../test2.mp4")
+                    videoArea.openFile("../../../test.mp4")
                     // 在这里执行你的操作
                 }
             }

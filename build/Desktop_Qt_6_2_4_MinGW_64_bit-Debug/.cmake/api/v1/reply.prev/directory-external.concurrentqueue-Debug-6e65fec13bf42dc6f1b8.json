@@ -1,0 +1,87 @@
+{
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"install"
+		],
+		"files" : 
+		[
+			"external/concurrentqueue/CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 32,
+				"parent" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 44,
+				"parent" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 54,
+				"parent" : 0
+			}
+		]
+	},
+	"installers" : 
+	[
+		{
+			"backtrace" : 1,
+			"component" : "Devel",
+			"destination" : "lib/cmake/concurrentqueue",
+			"exportName" : "concurrentqueueTargets",
+			"exportTargets" : 
+			[
+				{
+					"id" : "concurrentqueue::@4bdbdc2c5af6d047a9e9",
+					"index" : 0
+				}
+			],
+			"paths" : 
+			[
+				"external/concurrentqueue/CMakeFiles/Export/a0893b6404edf66f9e8aae21e38f7549/concurrentqueueTargets.cmake"
+			],
+			"type" : "export"
+		},
+		{
+			"backtrace" : 2,
+			"component" : "Devel",
+			"destination" : "lib/cmake/concurrentqueue",
+			"paths" : 
+			[
+				"build/Desktop_Qt_6_2_4_MinGW_64_bit-Debug/external/concurrentqueue/concurrentqueueConfig.cmake",
+				"build/Desktop_Qt_6_2_4_MinGW_64_bit-Debug/external/concurrentqueue/concurrentqueueConfigVersion.cmake"
+			],
+			"type" : "file"
+		},
+		{
+			"backtrace" : 3,
+			"component" : "Unspecified",
+			"destination" : "include/concurrentqueue/moodycamel",
+			"paths" : 
+			[
+				"external/concurrentqueue/blockingconcurrentqueue.h",
+				"external/concurrentqueue/concurrentqueue.h",
+				"external/concurrentqueue/lightweightsemaphore.h",
+				"external/concurrentqueue/LICENSE.md"
+			],
+			"type" : "file"
+		}
+	],
+	"paths" : 
+	{
+		"build" : "external/concurrentqueue",
+		"source" : "external/concurrentqueue"
+	}
+}

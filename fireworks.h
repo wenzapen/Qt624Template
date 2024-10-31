@@ -8,7 +8,7 @@
 #include "renderer.h"
 #include "platform.h"
 #include <optional>
-
+#include <updatevalue.h>
 
 #include <QImage>
 extern "C" {
@@ -23,51 +23,16 @@ struct YT20RenderSettings
     // and the other will be synchronized in SYNC stage.
     UpdateValueVideoFrameRef videoFrame;
 
+
+    void updateBy(YT20RenderSettings &settings)
+    {
+        videoFrame.updateBy(settings.videoFrame);
+
+    }
 };
 
-// 将 VideoFrameRef 转换为 QImage，支持多种像素格式
-inline QImage videoFrameRefToQImage(VideoFrameRef &videoFrameRef) {
-    if (!videoFrameRef.isValid()) {
-        return QImage(); // 返回无效 QImage
-    }
 
-    int width = videoFrameRef.getWidth();
-    int height = videoFrameRef.getHeight();
-    const AVFrame *frame = static_cast<const AVFrame*>(videoFrameRef.getFrame()->getAVFrame());
 
-    // 创建 QImage (RGB888 格式)
-    QImage image(width, height, QImage::Format_RGB888);
-
-    // 创建 libswscale 的转换上下文
-    SwsContext *swsContext = sws_getContext(
-        width, height,
-        static_cast<AVPixelFormat>(frame->format), // 输入帧格式
-        width, height,
-        AV_PIX_FMT_RGB24, // 输出格式为 RGB24
-        SWS_BILINEAR,     // 缩放算法（这里选择双线性）
-        nullptr, nullptr, nullptr);
-
-    if (!swsContext) {
-        qWarning("Failed to create SwsContext for frame conversion");
-        return QImage();
-    }
-
-    // 设置目标数据指针（RGB 格式）
-    uint8_t *dest[4] = { image.bits(), nullptr, nullptr, nullptr };
-    int destStride[4] = { 3 * width, 0, 0, 0 }; // RGB888 每行 3 字节
-
-    // 执行格式转换
-    sws_scale(swsContext,
-              frame->data,    // 输入图像数据
-              frame->linesize, // 输入图像步长
-              0, height,
-              dest, destStride);
-
-    // 释放转换上下文
-    sws_freeContext(swsContext);
-
-    return image;
-}
 
 
 class Fireworks : public QQuickItem {
@@ -89,11 +54,14 @@ private:
     int m_frameHeight = 1;
     int m_frameWidth = 1;
     double m_frameRate = 1.0;
-    VideoFrameRef frame;
-    bool firstImage = true;
+    // PONY_GUARD_BY(MAIN)
+    YT20RenderSettings mainSettings;
+    // PONY_GUARD_BY(RENDER)
+    YT20RenderSettings renderSettings;
 protected:
     QSGNode *updatePaintNode(QSGNode *node, UpdatePaintNodeData *data) override {
         qDebug("fireworks: updatePaintNode: triggered");
+        renderSettings.updateBy(mainSettings);
         QSGSimpleTextureNode *textureNode = static_cast<QSGSimpleTextureNode *>(node);
         if (!textureNode) {
             textureNode = new QSGSimpleTextureNode();
@@ -101,16 +69,7 @@ protected:
 
         // FFmpeg 解码后的图像数据转换为 QImage
         QImage frameImage;
-        // if (firstImage) {
-        //     frameImage = QImage("test1.jpg");   // 假设 getDecodedFrame() 返回解码后的帧
-        //     firstImage = !firstImage;
-
-        // } else {
-        //     frameImage = QImage("test1.jpeg");   // 假设 getDecodedFrame() 返回解码后的帧
-        //     firstImage = !firstImage;
-        // }
-        // QImage frameImage("test1.jpg");   // 假设 getDecodedFrame() 返回解码后的帧
-        frameImage = videoFrameRefToQImage(frame);
+        frameImage = videoFrameRefToQImage();
 
         // 释放旧的纹理（如果存在）
         if (textureNode->texture()) {
@@ -144,7 +103,7 @@ public:
             if (win) {
                 // connect(this->window(), &QQuickWindow::beforeSynchronizing, m_renderer, &FireworksRenderer::sync, Qt::DirectConnection);
                 // connect(this->window(), &QQuickWindow::beforeRendering, m_renderer, &FireworksRenderer::init, Qt::DirectConnection);
-                win->setColor(Qt::black);
+                // win->setColor(Qt::black);
             } else {
                 qWarning() << "Window destroy.";
             }
@@ -203,6 +162,51 @@ public:
         return m_frameRate;
     }
 
+    // 将 VideoFrameRef 转换为 QImage，支持多种像素格式
+    QImage videoFrameRefToQImage() {
+        const VideoFrameRef &videoFrameRef = renderSettings.videoFrame;
+        if (!videoFrameRef.isValid()) {
+            return QImage(); // 返回无效 QImage
+        }
+
+        int width = videoFrameRef.getWidth();
+        int height = videoFrameRef.getHeight();
+        const AVFrame *frame = static_cast<const AVFrame*>(videoFrameRef.getFrame()->getAVFrame());
+
+        // 创建 QImage (RGB888 格式)
+        QImage image(width, height, QImage::Format_RGB888);
+
+        // 创建 libswscale 的转换上下文
+        SwsContext *swsContext = sws_getContext(
+            width, height,
+            static_cast<AVPixelFormat>(frame->format), // 输入帧格式
+            width, height,
+            AV_PIX_FMT_RGB24, // 输出格式为 RGB24
+            SWS_BILINEAR,     // 缩放算法（这里选择双线性）
+            nullptr, nullptr, nullptr);
+
+        if (!swsContext) {
+            qWarning("Failed to create SwsContext for frame conversion");
+            return QImage();
+        }
+
+        // 设置目标数据指针（RGB 格式）
+        uint8_t *dest[4] = { image.bits(), nullptr, nullptr, nullptr };
+        int destStride[4] = { 3 * width, 0, 0, 0 }; // RGB888 每行 3 字节
+
+        // 执行格式转换
+        sws_scale(swsContext,
+                  frame->data,    // 输入图像数据
+                  frame->linesize, // 输入图像步长
+                  0, height,
+                  dest, destStride);
+
+        // 释放转换上下文
+        sws_freeContext(swsContext);
+
+        return image;
+    }
+
 
 public slots:
 
@@ -221,16 +225,12 @@ public slots:
         //         emit frameSizeChanged();
         //     }
         // }
-        if (frame == pic)
+        if (static_cast<const VideoFrameRef &>(mainSettings.videoFrame) == pic)
         {
-            // return false;
-            qDebug("fireworks: setVideoFrame: received a same frame");
             return;
         }
         {
-            frame = pic;
-            qDebug("fireworks: setVideoFrame: received a new frame");
-            // return true;
+            mainSettings.videoFrame = pic;
         }
         this->update();
         if (!pic.isSameSize(m_frameWidth, m_frameHeight)) {
