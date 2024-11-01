@@ -222,6 +222,18 @@
             },
             {
                 "className": "YT20Player",
+                "enums": [
+                    {
+                        "isClass": false,
+                        "isFlag": false,
+                        "name": "OpenFileResultType",
+                        "values": [
+                            "FAILED",
+                            "VIDEO",
+                            "AUDIO"
+                        ]
+                    }
+                ],
                 "namespace": true,
                 "qualifiedClassName": "YT20Player"
             }

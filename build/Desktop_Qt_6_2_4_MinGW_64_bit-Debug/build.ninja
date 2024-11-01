@@ -167,7 +167,7 @@ build all_qmllint: phony appQt624Template_qmllint
 #############################################
 # Utility command for appQt624Template_tooling
 
-build appQt624Template_tooling: phony Qt624Template/CustomRadioButton.qml Qt624Template/main.qml Qt624Template/shader/fragment.fsh Qt624Template/shader/vertex.vsh
+build appQt624Template_tooling: phony Qt624Template/CustomRadioButton.qml Qt624Template/main.qml Qt624Template/shader/fragment.fsh Qt624Template/shader/vertex.vsh Qt624Template/ReadMe.md
 
 
 #############################################
@@ -331,7 +331,7 @@ build .rcc/qmlcache/appQt624Template_main_qml.cpp | ${cmake_ninja_workdir}.rcc/q
 #############################################
 # Custom command for .rcc\qrc_appQt624Template_raw_qml_0.cpp
 
-build .rcc/qrc_appQt624Template_raw_qml_0.cpp | ${cmake_ninja_workdir}.rcc/qrc_appQt624Template_raw_qml_0.cpp: CUSTOM_COMMAND C$:/D/QT/Qt624Template/CustomRadioButton.qml C$:/D/QT/Qt624Template/main.qml C$:/D/QT/Qt624Template/shader/fragment.fsh C$:/D/QT/Qt624Template/shader/vertex.vsh .rcc/appQt624Template_raw_qml_0.qrc C$:/Qt/6.2.4/mingw_64/./bin/rcc.exe || appQt624Template_autogen appQt624Template_autogen_timestamp_deps appQt624Template_tooling external/rwqueue/rwqueue external/sonic/libsonic.a external/sonic/sonic_autogen external/sonic/sonic_autogen_timestamp_deps
+build .rcc/qrc_appQt624Template_raw_qml_0.cpp | ${cmake_ninja_workdir}.rcc/qrc_appQt624Template_raw_qml_0.cpp: CUSTOM_COMMAND C$:/D/QT/Qt624Template/CustomRadioButton.qml C$:/D/QT/Qt624Template/main.qml C$:/D/QT/Qt624Template/shader/fragment.fsh C$:/D/QT/Qt624Template/shader/vertex.vsh C$:/D/QT/Qt624Template/ReadMe.md .rcc/appQt624Template_raw_qml_0.qrc C$:/Qt/6.2.4/mingw_64/./bin/rcc.exe || appQt624Template_autogen appQt624Template_autogen_timestamp_deps appQt624Template_tooling external/rwqueue/rwqueue external/sonic/libsonic.a external/sonic/sonic_autogen external/sonic/sonic_autogen_timestamp_deps
   COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\D\QT\Qt624Template\build\Desktop_Qt_6_2_4_MinGW_64_bit-Debug && C:\Qt\6.2.4\mingw_64\.\bin\rcc.exe --output C:/D/QT/Qt624Template/build/Desktop_Qt_6_2_4_MinGW_64_bit-Debug/.rcc/qrc_appQt624Template_raw_qml_0.cpp --name appQt624Template_raw_qml_0 C:/D/QT/Qt624Template/build/Desktop_Qt_6_2_4_MinGW_64_bit-Debug/.rcc/appQt624Template_raw_qml_0.qrc --no-zstd"
   DESC = Running rcc for resource appQt624Template_raw_qml_0
   restat = 1
@@ -403,6 +403,15 @@ build Qt624Template/shader/fragment.fsh | ${cmake_ninja_workdir}Qt624Template/sh
 build Qt624Template/shader/vertex.vsh | ${cmake_ninja_workdir}Qt624Template/shader/vertex.vsh: CUSTOM_COMMAND C$:/D/QT/Qt624Template/shader/vertex.vsh
   COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\D\QT\Qt624Template && C:\Qt\Tools\CMake_64\bin\cmake.exe -E copy shader/vertex.vsh C:/D/QT/Qt624Template/build/Desktop_Qt_6_2_4_MinGW_64_bit-Debug/Qt624Template/shader/vertex.vsh"
   DESC = Generating Qt624Template/shader/vertex.vsh
+  restat = 1
+
+
+#############################################
+# Custom command for Qt624Template\ReadMe.md
+
+build Qt624Template/ReadMe.md | ${cmake_ninja_workdir}Qt624Template/ReadMe.md: CUSTOM_COMMAND C$:/D/QT/Qt624Template/ReadMe.md
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\D\QT\Qt624Template && C:\Qt\Tools\CMake_64\bin\cmake.exe -E copy ReadMe.md C:/D/QT/Qt624Template/build/Desktop_Qt_6_2_4_MinGW_64_bit-Debug/Qt624Template/ReadMe.md"
+  DESC = Generating Qt624Template/ReadMe.md
   restat = 1
 
 

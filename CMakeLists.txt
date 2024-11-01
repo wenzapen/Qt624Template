@@ -85,6 +85,7 @@ qt_add_qml_module(appQt624Template
         SOURCES backward.h
         RESOURCES shader/fragment.fsh
         RESOURCES shader/vertex.vsh
+        RESOURCES ReadMe.md
 )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.

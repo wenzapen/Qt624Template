@@ -76,12 +76,30 @@ protected:
             delete textureNode->texture();
         }
         // 创建纹理
+
+        // 创建新的纹理
         QSGTexture *texture = window()->createTextureFromImage(frameImage);
         textureNode->setTexture(texture);
-        // textureNode->setRect(boundingRect()); // 设置显示区域
-        // 设置显示区域，使用帧的尺寸
-        textureNode->setRect(0, 0, frameImage.width(), frameImage.height());
 
+        // 获取窗口的宽度和高度
+        qreal winWidth = width();
+        qreal winHeight = height();
+
+        // 图像的宽度和高度
+        qreal imgWidth = frameImage.width();
+        qreal imgHeight = frameImage.height();
+
+        // 计算缩放比例，保持图像宽高比
+        qreal scale = qMin(winWidth / imgWidth, winHeight / imgHeight);
+
+        // 计算显示区域，使图像居中
+        qreal displayWidth = imgWidth * scale;
+        qreal displayHeight = imgHeight * scale;
+        qreal offsetX = (winWidth - displayWidth) / 2;
+        qreal offsetY = (winHeight - displayHeight) / 2;
+
+        // 设置显示区域
+        textureNode->setRect(offsetX, offsetY, displayWidth, displayHeight);
         return textureNode;
 
         // return m_renderer;
@@ -104,11 +122,14 @@ public:
                 // connect(this->window(), &QQuickWindow::beforeSynchronizing, m_renderer, &FireworksRenderer::sync, Qt::DirectConnection);
                 // connect(this->window(), &QQuickWindow::beforeRendering, m_renderer, &FireworksRenderer::init, Qt::DirectConnection);
                 // win->setColor(Qt::black);
+
             } else {
                 qWarning() << "Window destroy.";
             }
 
         });
+
+
         qDebug() << "Create Hurricane QuickItem.";
     }
     ~Fireworks() override {
@@ -225,8 +246,10 @@ public slots:
         //         emit frameSizeChanged();
         //     }
         // }
+        qDebug() << "received a new frame";
         if (static_cast<const VideoFrameRef &>(mainSettings.videoFrame) == pic)
         {
+                qDebug() << "received a new frame, but is same";
             return;
         }
         {

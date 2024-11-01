@@ -339,17 +339,22 @@ void ReverseDecodeDispatcher::signalStartWorker(QPrivateSignal _t1)
     QMetaObject::activate(this, &staticMetaObject, 0, _a);
 }
 struct qt_meta_stringdata_YT20Player_t {
-    const uint offsetsAndSize[2];
-    char stringdata0[11];
+    const uint offsetsAndSize[10];
+    char stringdata0[49];
 };
 #define QT_MOC_LITERAL(ofs, len) \
     uint(offsetof(qt_meta_stringdata_YT20Player_t, stringdata0) + ofs), len 
 static const qt_meta_stringdata_YT20Player_t qt_meta_stringdata_YT20Player = {
     {
-QT_MOC_LITERAL(0, 10) // "YT20Player"
+QT_MOC_LITERAL(0, 10), // "YT20Player"
+QT_MOC_LITERAL(11, 18), // "OpenFileResultType"
+QT_MOC_LITERAL(30, 6), // "FAILED"
+QT_MOC_LITERAL(37, 5), // "VIDEO"
+QT_MOC_LITERAL(43, 5) // "AUDIO"
 
     },
-    "YT20Player"
+    "YT20Player\0OpenFileResultType\0FAILED\0"
+    "VIDEO\0AUDIO"
 };
 #undef QT_MOC_LITERAL
 
@@ -361,10 +366,18 @@ static const uint qt_meta_data_YT20Player[] = {
        0,    0, // classinfo
        0,    0, // methods
        0,    0, // properties
-       0,    0, // enums/sets
+       1,   14, // enums/sets
        0,    0, // constructors
        4,       // flags
        0,       // signalCount
+
+ // enums: name, alias, flags, count, data
+       1,    1, 0x0,    3,   19,
+
+ // enum data: key, value
+       2, uint(YT20Player::FAILED),
+       3, uint(YT20Player::VIDEO),
+       4, uint(YT20Player::AUDIO),
 
        0        // eod
 };

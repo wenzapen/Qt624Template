@@ -32,7 +32,7 @@ extern "C" {
         AUDIO          ///< 打开的文件为音频文件
     };
 
-    // Q_ENUM_NS(OpenFileResultType)
+    Q_ENUM_NS(OpenFileResultType)
 }
 
 

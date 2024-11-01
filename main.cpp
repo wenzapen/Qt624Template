@@ -10,6 +10,14 @@ int main(int argc, char *argv[])
 
     qmlRegisterType<Hurricane>("HurricanePlayer", 1, 0, "HurricanePlayer");
 
+    qmlRegisterUncreatableMetaObject(
+        YT20Player::staticMetaObject, // meta object created by Q_NAMESPACE macro
+        "yt20player.ns",                // import statement (can be any string)
+        1, 0,                          // major and minor version of the import
+        "YT20PlayerNS",                 // name in QML (does not have to match C++ name)
+        "Error: only enums"            // error in case someone tries to create a MyNamespace object
+        );
+
     QQmlApplicationEngine engine;
     const QUrl url(QStringLiteral("qrc:/Qt624Template/main.qml"));
     QObject::connect(

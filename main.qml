@@ -2,6 +2,7 @@ import QtQuick
 import QtQuick.Controls
 import QtMultimedia
 import HurricanePlayer 1.0
+import yt20player.ns 1.0
 
 ApplicationWindow {
     id: mainWindow
@@ -42,12 +43,25 @@ ApplicationWindow {
                 }
             }
             Component.onCompleted: {
-                    mainWindow.start.connect(videoArea.start)
-                    mainWindow.stop.connect(videoArea.pause)
-                    // mainWindow.openFile.connect(videoArea.openFile)
-                    delayTimer.start()
+
+                mainWindow.start.connect(videoArea.start)
+                mainWindow.stop.connect(videoArea.pause)
+                // mainWindow.openFile.connect(videoArea.openFile)
+                delayTimer.start()
 
                 }
+            onOpenFileResult: (result)=> {
+                if(result == YT20PlayerNS.FAILED)
+                {
+                }
+                else if(result == YT20PlayerNS.VIDEO)
+                {
+                    mainWindow.start()
+                }
+                else if(result == YT20PlayerNS.AUDIO){
+                    mainWindow.start()
+                }
+            }
 
             Timer {
                 id: delayTimer
@@ -55,7 +69,7 @@ ApplicationWindow {
                 repeat: false   // Only run once
                 onTriggered: {
                     console.log("2 seconds have passed, executing operation")
-                    videoArea.openFile("../../../test.mp4")
+                    videoArea.openFile("../../../test2.mp4")
                     // 在这里执行你的操作
                 }
             }
