@@ -26,12 +26,40 @@ public:
         while(ret >= 0 && !interrupt) {
             ret = avcodec_receive_frame(codecCtx, frameBuf);
             if (ret >= 0) {
-                if(!frameQueue->push(frameBuf)) {
-                    frameQueue->clear([](AVFrame *frame) { av_frame_free(&frame); });
-                    av_frame_unref(frameBuf);
-                    return false;
+
+                // 检查帧是否为硬件格式，如果是，转换为CPU兼容格式
+                if (DecoderContext::hwPixFmt != AV_PIX_FMT_NONE && frameBuf->format == DecoderContext::hwPixFmt) {
+                    // AVFrame *cpuFrame = av_frame_alloc();
+                    // if (!cpuFrame) {
+                    //     throw std::runtime_error("Cannot alloc frame buf.");
+                    // }
+                    if (av_hwframe_transfer_data(cpuFrame, frameBuf, 0) < 0) {
+                        qWarning() << "Failed to transfer frame to CPU.";
+                        av_frame_unref(cpuFrame);
+                        // av_frame_unref(frameBuf);
+                        return false;
+                    }
+                    if (!frameQueue->push(cpuFrame)) {
+                        qDebug() << "push failure";
+                        frameQueue->clear([](AVFrame *frame) { av_frame_free(&frame); });
+                        av_frame_unref(cpuFrame);
+                        // av_frame_unref(frameBuf);  // 释放临时的CPU帧
+                        return false;
+                    }
+                    // av_frame_unref(frameBuf);
+                    // frameBuf = av_frame_alloc();
+                    qDebug() << "hardware decode sucesss";
+                    cpuFrame = av_frame_alloc();
+                } else {
+                    if (!frameQueue->push(frameBuf)) {
+                        frameQueue->clear([](AVFrame *frame) { av_frame_free(&frame); });
+                        av_frame_unref(frameBuf);
+                        return false;
+                    }
+                    qDebug() << "SW decode sucesss";
+                    frameBuf = av_frame_alloc();
                 }
-                frameBuf = av_frame_alloc();
+
             } else if (ret == AVERROR(EAGAIN)) {
                 return true;
             } else if (ret == ERROR_EOF) {

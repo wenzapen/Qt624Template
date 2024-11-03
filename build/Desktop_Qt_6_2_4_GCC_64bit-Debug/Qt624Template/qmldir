@@ -1,5 +1,0 @@
-module Qt624Template
-typeinfo appQt624Template.qmltypes
-prefer :/Qt624Template/
-CustomRadioButton 1.0 CustomRadioButton.qml
-

@@ -193,7 +193,7 @@ public:
         int width = videoFrameRef.getWidth();
         int height = videoFrameRef.getHeight();
         const AVFrame *frame = static_cast<const AVFrame*>(videoFrameRef.getFrame()->getAVFrame());
-
+        qDebug()<<"frame format: "<< frame->format;
         // 创建 QImage (RGB888 格式)
         QImage image(width, height, QImage::Format_RGB888);
 

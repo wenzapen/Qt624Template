@@ -10,6 +10,7 @@ int main(int argc, char *argv[])
 
     qmlRegisterType<Hurricane>("HurricanePlayer", 1, 0, "HurricanePlayer");
 
+
     qmlRegisterUncreatableMetaObject(
         YT20Player::staticMetaObject, // meta object created by Q_NAMESPACE macro
         "yt20player.ns",                // import statement (can be any string)
@@ -20,6 +21,7 @@ int main(int argc, char *argv[])
 
     QQmlApplicationEngine engine;
     const QUrl url(QStringLiteral("qrc:/Qt624Template/main.qml"));
+    // const QUrl url(QStringLiteral("qrc:/Qt624Template/hardwareVideoPlayer.qml"));
     QObject::connect(
         &engine,
         &QQmlApplicationEngine::objectCreated,
