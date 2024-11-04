@@ -152,3 +152,16 @@ install(TARGETS appQt624Template
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
 )
+
+# 添加 windeployqt 自动部署功能
+if(WIN32)
+    # 查找 Qt 安装路径
+    get_target_property(QT_BIN_DIR Qt6::qmake IMPORTED_LOCATION)
+    get_filename_component(QT_BIN_DIR ${QT_BIN_DIR} DIRECTORY)
+
+    # 添加部署命令
+    add_custom_command(TARGET appQt624Template POST_BUILD
+        COMMAND "${QT_BIN_DIR}/windeployqt.exe" --qmldir "${CMAKE_SOURCE_DIR}" "$<TARGET_FILE:appQt624Template>"
+        COMMENT "Running windeployqt to bundle Qt dependencies."
+    )
+endif()

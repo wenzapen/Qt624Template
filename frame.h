@@ -31,7 +31,7 @@ public:
     ~VideoFrame() {
         if (m_frame) {
             --totalCount;
-            qDebug() << "deconstructor VideoFrame : " << static_cast<void*>(m_frame);
+            // qDebug() << "deconstructor VideoFrame : " << static_cast<void*>(m_frame);
             av_frame_free(&m_frame);
             // av_frame_unref(m_frame);
 

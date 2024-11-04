@@ -60,7 +60,7 @@ private:
     YT20RenderSettings renderSettings;
 protected:
     QSGNode *updatePaintNode(QSGNode *node, UpdatePaintNodeData *data) override {
-        qDebug("fireworks: updatePaintNode: triggered");
+        // qDebug("fireworks: updatePaintNode: triggered");
         renderSettings.updateBy(mainSettings);
         QSGSimpleTextureNode *textureNode = static_cast<QSGSimpleTextureNode *>(node);
         if (!textureNode) {
@@ -193,7 +193,7 @@ public:
         int width = videoFrameRef.getWidth();
         int height = videoFrameRef.getHeight();
         const AVFrame *frame = static_cast<const AVFrame*>(videoFrameRef.getFrame()->getAVFrame());
-        qDebug()<<"frame format: "<< frame->format;
+        // qDebug()<<"frame format: "<< frame->format;
         // 创建 QImage (RGB888 格式)
         QImage image(width, height, QImage::Format_RGB888);
 
@@ -246,17 +246,17 @@ public slots:
         //         emit frameSizeChanged();
         //     }
         // }
-        qDebug() << "received a new frame, format: " << pic.m_videoFrame->m_frame->format;
+        // qDebug() << "received a new frame, format: " << pic.m_videoFrame->m_frame->format;
         if (static_cast<const VideoFrameRef &>(mainSettings.videoFrame) == pic)
         {
                 qDebug() << "received a new frame, but is same";
             return;
         }
         {
-            qDebug() << "new frame address: " << static_cast<void*>(pic.m_videoFrame);
-            qDebug() << "old frame in mainSettings: " << static_cast<void*>(mainSettings.videoFrame.m_value.m_videoFrame);
+            // qDebug() << "new frame address: " << static_cast<void*>(pic.m_videoFrame);
+            // qDebug() << "old frame in mainSettings: " << static_cast<void*>(mainSettings.videoFrame.m_value.m_videoFrame);
             mainSettings.videoFrame = pic;
-            qDebug() << "new frame in mainSettings: " << static_cast<void*>(mainSettings.videoFrame.m_value.m_videoFrame);
+            // qDebug() << "new frame in mainSettings: " << static_cast<void*>(mainSettings.videoFrame.m_value.m_videoFrame);
         }
 
         this->update();

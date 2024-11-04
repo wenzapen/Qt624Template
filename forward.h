@@ -34,7 +34,7 @@ public:
                     // if (!cpuFrame) {
                     //     throw std::runtime_error("Cannot alloc frame buf.");
                     // }
-                    qDebug() << "Hw decode frameBuff.format: " << frameBuf->format;
+                    // qDebug() << "Hw decode frameBuff.format: " << frameBuf->format;
                     if (av_hwframe_transfer_data(cpuFrame, frameBuf, 0) < 0) {
                         qWarning() << "Failed to transfer frame to CPU.";
                         av_frame_unref(cpuFrame);
@@ -54,22 +54,22 @@ public:
                         av_frame_unref(frameBuf);  // 释放临时的CPU帧
                         return false;
                     }
-                    av_frame_unref(frameBuf);
-                    frameBuf = av_frame_alloc();
-                    qDebug() << "hardware decode sucesss";
+                    // av_frame_unref(frameBuf);
+                    // frameBuf = av_frame_alloc();
+                    // qDebug() << "hardware decode sucesss";
                     cpuFrame = av_frame_alloc();
-                    qDebug() << "frameBuff: " << static_cast<void*>(frameBuf);
-                    qDebug() << "cpuFrame: " << static_cast<void*>(cpuFrame);
+                    // qDebug() << "frameBuff: " << static_cast<void*>(frameBuf);
+                    // qDebug() << "cpuFrame: " << static_cast<void*>(cpuFrame);
                 } else {
 
-                    qDebug() << "SW decode frameBuff.format: " << frameBuf->format;
+                    // qDebug() << "SW decode frameBuff.format: " << frameBuf->format;
 
                     if (!frameQueue->push(frameBuf)) {
                         frameQueue->clear([](AVFrame *frame) { av_frame_free(&frame); });
                         av_frame_unref(frameBuf);
                         return false;
                     }
-                    qDebug() << "SW decode sucesss";
+                    // qDebug() << "SW decode sucesss";
                     frameBuf = av_frame_alloc();
                 }
 
@@ -199,11 +199,11 @@ public:
 
     VideoFrameRef getPicture() override {
         if (stillVideoFrame != nullptr) {
-            qDebug() << "stillVideoFrame is available: " <<  static_cast<void *>(stillVideoFrame);
+            // qDebug() << "stillVideoFrame is available: " <<  static_cast<void *>(stillVideoFrame);
             return {stillVideoFrame, true, -1};
         }
         AVFrame *frame = frameQueue->remove(true);
-        qDebug() << "stillVideoFrame is not available,get pic from decoder: " << static_cast<void *>(frame) << "format: " << frame->format;
+        // qDebug() << "stillVideoFrame is not available,get pic from decoder: " << static_cast<void *>(frame) << "format: " << frame->format;
         if (!frame) { return {}; }
         if (frame->pts < 0) {
             stillVideoFrame = frame;
