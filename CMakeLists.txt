@@ -12,8 +12,8 @@ if (WIN32)
     set(FFMPEG_LIB_DIR "C:/D/ffmpeg/lib")
     set(FFMPEG_LIBS "avformat;avcodec;avutil;swscale;swresample;avdevice;avfilter;postproc")  # 根据需要修改
 else()
-    set(FFMPEG_INCLUDE_DIR "/usr/local/ffmpeg/include")
-    set(FFMPEG_LIB_DIR "/usr/local/ffmpeg/lib")
+    set(FFMPEG_INCLUDE_DIR "/usr/local/ffmpeg5.1.2/include")
+    set(FFMPEG_LIB_DIR "/usr/local/ffmpeg5.1.2/lib")
     set(FFMPEG_LIBS "avformat;avcodec;avutil;swscale;swresample;avdevice;avfilter;postproc")
 endif()
 

@@ -84,6 +84,7 @@ protected:
     bool isAudio = false;
 
     explicit DemuxDispatcherBase(const std::string &fn, QObject *parent) : QObject(parent), filename(fn) {
+        avformat_network_init();
         auto surfix = fn.substr(fn.rfind('.')+1);
         if (surfix == "mp3" || surfix == "wav")
             isAudio = true;
@@ -96,6 +97,7 @@ protected:
     }
 
     ~DemuxDispatcherBase() override {
+        avformat_network_deinit();
         if (fmtCtx) { avformat_close_input(&fmtCtx); }
     }
 

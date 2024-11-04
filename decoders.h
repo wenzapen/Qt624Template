@@ -146,6 +146,7 @@ public:
         if (!(frameBuf = av_frame_alloc()) || !(cpuFrame = av_frame_alloc())) {
             throw std::runtime_error("Cannot alloc frame buf.");
         }
+        // cpuFrame->format = AV_PIX_FMT_YUV420P;
     }
 
     ~DecoderContext() {

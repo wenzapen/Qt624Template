@@ -32,30 +32,31 @@ public:
                 if (DecoderContext::hwPixFmt != AV_PIX_FMT_NONE && frameBuf->format == DecoderContext::hwPixFmt) {
 
                     //hardware decoder
-                    // if (av_hwframe_transfer_data(cpuFrame, frameBuf, 0) < 0) {
-                    //     qWarning() << "Failed to transfer frame to CPU.";
-                    //     av_frame_unref(cpuFrame);
-                    //     av_frame_unref(frameBuf);
-                    //     return false;
-                    // }
-                    // cpuFrame->pts = frameBuf->pts;
-
-                    // if (!frameQueue->push(cpuFrame)) {
-                    //     qDebug() << "push failure";
-                    //     frameQueue->clear([](AVFrame *frame) { av_frame_free(&frame); });
-                    //     av_frame_unref(cpuFrame);
-                    //     av_frame_unref(frameBuf);  // 释放临时的CPU帧
-                    //     return false;
-                    // }
-                    // cpuFrame = av_frame_alloc();
-
-                    if (!frameQueue->push(frameBuf)) {
-                        frameQueue->clear([](AVFrame *frame) { av_frame_free(&frame); });
+                    if (av_hwframe_transfer_data(cpuFrame, frameBuf, 0) < 0) {
+                        qWarning() << "Failed to transfer frame to CPU.";
+                        av_frame_unref(cpuFrame);
                         av_frame_unref(frameBuf);
                         return false;
                     }
+                    cpuFrame->pts = frameBuf->pts;
+
+                    if (!frameQueue->push(cpuFrame)) {
+                        qDebug() << "push failure";
+                        frameQueue->clear([](AVFrame *frame) { av_frame_free(&frame); });
+                        av_frame_unref(cpuFrame);
+                        av_frame_unref(frameBuf);  // 释放临时的CPU帧
+                        return false;
+                    }
+                    cpuFrame = av_frame_alloc();
+                    // cpuFrame->format = AV_PIX_FMT_YUV420P;
+
+                    // if (!frameQueue->push(frameBuf)) {
+                    //     frameQueue->clear([](AVFrame *frame) { av_frame_free(&frame); });
+                    //     av_frame_unref(frameBuf);
+                    //     return false;
+                    // }
                     // qDebug() << "SW decode sucesss";
-                    frameBuf = av_frame_alloc();
+                    // frameBuf = av_frame_alloc();
 
                 } else {
 
