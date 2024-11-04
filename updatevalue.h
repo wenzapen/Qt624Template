@@ -10,7 +10,7 @@
 
 template<typename T>
 class UpdateValue {
-protected:
+public:
     T m_value;
     bool m_update;
 public:

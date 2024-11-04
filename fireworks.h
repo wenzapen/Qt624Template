@@ -246,15 +246,19 @@ public slots:
         //         emit frameSizeChanged();
         //     }
         // }
-        qDebug() << "received a new frame";
+        qDebug() << "received a new frame, format: " << pic.m_videoFrame->m_frame->format;
         if (static_cast<const VideoFrameRef &>(mainSettings.videoFrame) == pic)
         {
                 qDebug() << "received a new frame, but is same";
             return;
         }
         {
+            qDebug() << "new frame address: " << static_cast<void*>(pic.m_videoFrame);
+            qDebug() << "old frame in mainSettings: " << static_cast<void*>(mainSettings.videoFrame.m_value.m_videoFrame);
             mainSettings.videoFrame = pic;
+            qDebug() << "new frame in mainSettings: " << static_cast<void*>(mainSettings.videoFrame.m_value.m_videoFrame);
         }
+
         this->update();
         if (!pic.isSameSize(m_frameWidth, m_frameHeight)) {
             m_frameWidth = pic.getWidth();

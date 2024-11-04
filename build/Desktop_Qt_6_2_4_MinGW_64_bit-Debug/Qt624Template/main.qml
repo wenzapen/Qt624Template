@@ -77,7 +77,7 @@ ApplicationWindow {
                 repeat: false   // 只运行一次
                 onTriggered: {
                     console.log("2 seconds have passed, executing operation")
-                    videoArea.openFile("../../../test2.mp4")
+                    videoArea.openFile("../../../test.mp4")
                 }
             }
         }

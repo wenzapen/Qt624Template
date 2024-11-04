@@ -59,6 +59,7 @@ C:/D/QT/Qt624Template/build/Desktop_Qt_6_2_4_MinGW_64_bit-Debug/appQt624Template
   C:/D/ffmpeg/include/libavutil/pixfmt.h \
   C:/D/ffmpeg/include/libavutil/rational.h \
   C:/D/ffmpeg/include/libavutil/samplefmt.h \
+  C:/D/ffmpeg/include/libavutil/timestamp.h \
   C:/D/ffmpeg/include/libavutil/version.h \
   C:/D/ffmpeg/include/libswresample/swresample.h \
   C:/D/ffmpeg/include/libswresample/version.h \

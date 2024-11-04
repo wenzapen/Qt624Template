@@ -192,12 +192,12 @@ public:
         }
         if (m_audioStreamIndex ==
             DEFAULT_STREAM_INDEX) { m_audioStreamIndex = description.m_audioStreamsIndex.front(); }
-        audioQueue = new TwinsBlockQueue<AVFrame *>("AudioQueue", 16);
+        audioQueue = new TwinsBlockQueue<AVFrame *>("AudioQueue", 32);
         m_audioDecoder = new DecoderImpl<Audio>(fmtCtx->streams[m_audioStreamIndex], audioQueue);
         description.audioDuration = m_audioDecoder->duration();
 
         // video
-        videoQueue = audioQueue->twins("VideoQueue", 16);
+        videoQueue = audioQueue->twins("VideoQueue", 32);
         if (isAudio) {
             // no video
             qDebug() << "audio only";

@@ -9,6 +9,7 @@ extern "C" {
 #include <libswresample/swresample.h>
 #include <libavutil/imgutils.h>
 #include <libavutil/hwcontext.h>
+#include  <libavutil/timestamp.h>
 }
 #include <QDebug>
 #include "frame.h"
@@ -134,6 +135,10 @@ public:
         if ( enableHwDecoder && !setupHardwareAcceleration(videoCodecPara->codec_id)) {
             std::cout << "Hardware acceleration not supported, using software decoding." << std::endl;
         }
+
+        // codecCtx->reorder_pts = 1;
+        codecCtx->pkt_timebase = stream->time_base;
+
 
         if (avcodec_open2(codecCtx, codec, nullptr) < 0) {
             throw std::runtime_error("Cannot open codec.");

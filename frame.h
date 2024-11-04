@@ -13,6 +13,7 @@ extern "C" {
     typedef std::function<void(AVFrame *)> FrameFreeFunc;
 
 class VideoFrame {
+public:
     AVFrame *m_frame;
     std::atomic<int> m_refCount;
     const double m_pts;
@@ -30,7 +31,10 @@ public:
     ~VideoFrame() {
         if (m_frame) {
             --totalCount;
+            qDebug() << "deconstructor VideoFrame : " << static_cast<void*>(m_frame);
             av_frame_free(&m_frame);
+            // av_frame_unref(m_frame);
+
         }
     }
 
@@ -46,7 +50,7 @@ public:
 };
 
 class VideoFrameRef {
-private:
+public:
     VideoFrame *m_videoFrame;
 public:
     VideoFrameRef(AVFrame *frame, bool isValid, double pts) {

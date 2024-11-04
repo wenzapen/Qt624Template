@@ -57,6 +57,7 @@ C:/D/QT/Qt624Template/playback.h
  mdp:C:/D/ffmpeg/include/libavutil/pixfmt.h
  mdp:C:/D/ffmpeg/include/libavutil/rational.h
  mdp:C:/D/ffmpeg/include/libavutil/samplefmt.h
+ mdp:C:/D/ffmpeg/include/libavutil/timestamp.h
  mdp:C:/D/ffmpeg/include/libavutil/version.h
  mdp:C:/D/ffmpeg/include/libswresample/swresample.h
  mdp:C:/D/ffmpeg/include/libswresample/version.h
@@ -1232,6 +1233,7 @@ C:/D/QT/Qt624Template/demuxer.h
  mdp:C:/D/ffmpeg/include/libavutil/pixfmt.h
  mdp:C:/D/ffmpeg/include/libavutil/rational.h
  mdp:C:/D/ffmpeg/include/libavutil/samplefmt.h
+ mdp:C:/D/ffmpeg/include/libavutil/timestamp.h
  mdp:C:/D/ffmpeg/include/libavutil/version.h
  mdp:C:/D/ffmpeg/include/libswresample/swresample.h
  mdp:C:/D/ffmpeg/include/libswresample/version.h
@@ -1831,6 +1833,7 @@ C:/D/QT/Qt624Template/dispatcher.h
  mdp:C:/D/ffmpeg/include/libavutil/pixfmt.h
  mdp:C:/D/ffmpeg/include/libavutil/rational.h
  mdp:C:/D/ffmpeg/include/libavutil/samplefmt.h
+ mdp:C:/D/ffmpeg/include/libavutil/timestamp.h
  mdp:C:/D/ffmpeg/include/libavutil/version.h
  mdp:C:/D/ffmpeg/include/libswresample/swresample.h
  mdp:C:/D/ffmpeg/include/libswresample/version.h
@@ -3272,6 +3275,7 @@ C:/D/QT/Qt624Template/framecontroller.h
  mdp:C:/D/ffmpeg/include/libavutil/pixfmt.h
  mdp:C:/D/ffmpeg/include/libavutil/rational.h
  mdp:C:/D/ffmpeg/include/libavutil/samplefmt.h
+ mdp:C:/D/ffmpeg/include/libavutil/timestamp.h
  mdp:C:/D/ffmpeg/include/libavutil/version.h
  mdp:C:/D/ffmpeg/include/libswresample/swresample.h
  mdp:C:/D/ffmpeg/include/libswresample/version.h
@@ -4442,6 +4446,7 @@ C:/D/QT/Qt624Template/hurricane.h
  mdp:C:/D/ffmpeg/include/libavutil/pixfmt.h
  mdp:C:/D/ffmpeg/include/libavutil/rational.h
  mdp:C:/D/ffmpeg/include/libavutil/samplefmt.h
+ mdp:C:/D/ffmpeg/include/libavutil/timestamp.h
  mdp:C:/D/ffmpeg/include/libavutil/version.h
  mdp:C:/D/ffmpeg/include/libswresample/swresample.h
  mdp:C:/D/ffmpeg/include/libswresample/version.h
