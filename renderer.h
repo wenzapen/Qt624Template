@@ -147,7 +147,7 @@ public slots:
             return;
         } // already initialized
         program = new QOpenGLShaderProgram;
-        QOpenGLFunctions_3_3_Core::initializeOpenGLFunctions();
+        initializeOpenGLFunctions();
         static bool info = false;
         if (!info)
         {
@@ -159,8 +159,8 @@ public slots:
             qInfo() << "Renderer:" << QLatin1String(reinterpret_cast<const char *>(glGetString(GL_RENDERER)));
             info = true;
         }
-        program->addCacheableShaderFromSourceFile(QOpenGLShader::Vertex, u":/player/shader/vertex.vsh"_qs);
-        program->addCacheableShaderFromSourceFile(QOpenGLShader::Fragment, u":/player/shader/fragment.fsh"_qs);
+        program->addCacheableShaderFromSourceFile(QOpenGLShader::Vertex, u":/Qt624Template/shader/vertex.vsh"_qs);
+        program->addCacheableShaderFromSourceFile(QOpenGLShader::Fragment, u":/Qt624Template/shader/fragment.fsh"_qs);
         program->link();
         program->bind();
         brightnessLoc = program->uniformLocation("brightness");

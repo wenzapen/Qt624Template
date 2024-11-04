@@ -112,7 +112,7 @@ public:
     AVFrame *cpuFrame = nullptr;  // 用于存储从硬件转换后的CPU格式帧
     AVBufferRef *hw_device_ctx = nullptr;
     inline static enum AVPixelFormat hwPixFmt = AV_PIX_FMT_NONE;
-    bool enableHwDecoder = true;
+    bool enableHwDecoder = false;
 
     DecoderContext(AVStream *vs): stream(vs) {
         auto *videoCodecPara = stream->codecpar;

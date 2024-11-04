@@ -30,39 +30,34 @@ public:
 
                 // 检查帧是否为硬件格式，如果是，转换为CPU兼容格式
                 if (DecoderContext::hwPixFmt != AV_PIX_FMT_NONE && frameBuf->format == DecoderContext::hwPixFmt) {
-                    // AVFrame *cpuFrame = av_frame_alloc();
-                    // if (!cpuFrame) {
-                    //     throw std::runtime_error("Cannot alloc frame buf.");
+
+                    //hardware decoder
+                    // if (av_hwframe_transfer_data(cpuFrame, frameBuf, 0) < 0) {
+                    //     qWarning() << "Failed to transfer frame to CPU.";
+                    //     av_frame_unref(cpuFrame);
+                    //     av_frame_unref(frameBuf);
+                    //     return false;
                     // }
-                    // qDebug() << "Hw decode frameBuff.format: " << frameBuf->format;
-                    if (av_hwframe_transfer_data(cpuFrame, frameBuf, 0) < 0) {
-                        qWarning() << "Failed to transfer frame to CPU.";
-                        av_frame_unref(cpuFrame);
+                    // cpuFrame->pts = frameBuf->pts;
+
+                    // if (!frameQueue->push(cpuFrame)) {
+                    //     qDebug() << "push failure";
+                    //     frameQueue->clear([](AVFrame *frame) { av_frame_free(&frame); });
+                    //     av_frame_unref(cpuFrame);
+                    //     av_frame_unref(frameBuf);  // 释放临时的CPU帧
+                    //     return false;
+                    // }
+                    // cpuFrame = av_frame_alloc();
+
+                    if (!frameQueue->push(frameBuf)) {
+                        frameQueue->clear([](AVFrame *frame) { av_frame_free(&frame); });
                         av_frame_unref(frameBuf);
                         return false;
                     }
+                    // qDebug() << "SW decode sucesss";
+                    frameBuf = av_frame_alloc();
 
-                    // if (cpuFrame->pts == AV_NOPTS_VALUE) {
-                    //     cpuFrame->pts = av_frame_get_best_effort_timestamp(frameBuf);
-                    // }
-                    cpuFrame->pts = frameBuf->pts;
-
-                    if (!frameQueue->push(cpuFrame)) {
-                        qDebug() << "push failure";
-                        frameQueue->clear([](AVFrame *frame) { av_frame_free(&frame); });
-                        av_frame_unref(cpuFrame);
-                        av_frame_unref(frameBuf);  // 释放临时的CPU帧
-                        return false;
-                    }
-                    // av_frame_unref(frameBuf);
-                    // frameBuf = av_frame_alloc();
-                    // qDebug() << "hardware decode sucesss";
-                    cpuFrame = av_frame_alloc();
-                    // qDebug() << "frameBuff: " << static_cast<void*>(frameBuf);
-                    // qDebug() << "cpuFrame: " << static_cast<void*>(cpuFrame);
                 } else {
-
-                    // qDebug() << "SW decode frameBuff.format: " << frameBuf->format;
 
                     if (!frameQueue->push(frameBuf)) {
                         frameQueue->clear([](AVFrame *frame) { av_frame_free(&frame); });

@@ -61,48 +61,48 @@ private:
 protected:
     QSGNode *updatePaintNode(QSGNode *node, UpdatePaintNodeData *data) override {
         // qDebug("fireworks: updatePaintNode: triggered");
-        renderSettings.updateBy(mainSettings);
-        QSGSimpleTextureNode *textureNode = static_cast<QSGSimpleTextureNode *>(node);
-        if (!textureNode) {
-            textureNode = new QSGSimpleTextureNode();
-        }
+        // renderSettings.updateBy(mainSettings);
+        // QSGSimpleTextureNode *textureNode = static_cast<QSGSimpleTextureNode *>(node);
+        // if (!textureNode) {
+        //     textureNode = new QSGSimpleTextureNode();
+        // }
 
-        // FFmpeg 解码后的图像数据转换为 QImage
-        QImage frameImage;
-        frameImage = videoFrameRefToQImage();
+        // // FFmpeg 解码后的图像数据转换为 QImage
+        // QImage frameImage;
+        // frameImage = videoFrameRefToQImage();
 
-        // 释放旧的纹理（如果存在）
-        if (textureNode->texture()) {
-            delete textureNode->texture();
-        }
-        // 创建纹理
+        // // 释放旧的纹理（如果存在）
+        // if (textureNode->texture()) {
+        //     delete textureNode->texture();
+        // }
+        // // 创建纹理
 
-        // 创建新的纹理
-        QSGTexture *texture = window()->createTextureFromImage(frameImage);
-        textureNode->setTexture(texture);
+        // // 创建新的纹理
+        // QSGTexture *texture = window()->createTextureFromImage(frameImage);
+        // textureNode->setTexture(texture);
 
-        // 获取窗口的宽度和高度
-        qreal winWidth = width();
-        qreal winHeight = height();
+        // // 获取窗口的宽度和高度
+        // qreal winWidth = width();
+        // qreal winHeight = height();
 
-        // 图像的宽度和高度
-        qreal imgWidth = frameImage.width();
-        qreal imgHeight = frameImage.height();
+        // // 图像的宽度和高度
+        // qreal imgWidth = frameImage.width();
+        // qreal imgHeight = frameImage.height();
 
-        // 计算缩放比例，保持图像宽高比
-        qreal scale = qMin(winWidth / imgWidth, winHeight / imgHeight);
+        // // 计算缩放比例，保持图像宽高比
+        // qreal scale = qMin(winWidth / imgWidth, winHeight / imgHeight);
 
-        // 计算显示区域，使图像居中
-        qreal displayWidth = imgWidth * scale;
-        qreal displayHeight = imgHeight * scale;
-        qreal offsetX = (winWidth - displayWidth) / 2;
-        qreal offsetY = (winHeight - displayHeight) / 2;
+        // // 计算显示区域，使图像居中
+        // qreal displayWidth = imgWidth * scale;
+        // qreal displayHeight = imgHeight * scale;
+        // qreal offsetX = (winWidth - displayWidth) / 2;
+        // qreal offsetY = (winHeight - displayHeight) / 2;
 
-        // 设置显示区域
-        textureNode->setRect(offsetX, offsetY, displayWidth, displayHeight);
-        return textureNode;
+        // // 设置显示区域
+        // textureNode->setRect(offsetX, offsetY, displayWidth, displayHeight);
+        // return textureNode;
 
-        // return m_renderer;
+        return m_renderer;
     }
 
 public:
@@ -110,6 +110,7 @@ public:
         m_filterPrefix(YT20Player::getAssetsDir() + u"/filters"_qs), m_filterJsons()  {
         QDir filterDir(m_filterPrefix);
         for(auto && filename : filterDir.entryList({"*.json"})) {
+            qDebug() << "filename: "<< filename;
             QFile file = filterDir.filePath(filename);
             file.open(QIODevice::OpenModeFlag::ReadOnly);
             m_filterJsons.append(file.readAll());
@@ -119,9 +120,9 @@ public:
         connect(this, &QQuickItem::windowChanged, this, [this](QQuickWindow *win){
             qDebug() << "Window Size Changed:" << static_cast<void *>(win) << ".";
             if (win) {
-                // connect(this->window(), &QQuickWindow::beforeSynchronizing, m_renderer, &FireworksRenderer::sync, Qt::DirectConnection);
-                // connect(this->window(), &QQuickWindow::beforeRendering, m_renderer, &FireworksRenderer::init, Qt::DirectConnection);
-                // win->setColor(Qt::black);
+                connect(this->window(), &QQuickWindow::beforeSynchronizing, m_renderer, &FireworksRenderer::sync, Qt::DirectConnection);
+                connect(this->window(), &QQuickWindow::beforeRendering, m_renderer, &FireworksRenderer::init, Qt::DirectConnection);
+                win->setColor(Qt::black);
 
             } else {
                 qWarning() << "Window destroy.";
@@ -236,36 +237,36 @@ public slots:
         // setImage -> sync -> render
         // since picture may use on renderer thread, we CANNOT free now
         // no change, return immediately
-        // if (m_renderer->setVideoFrame(pic)) {
-        //     // make dirty
-        //     this->update();
-        //     if (!pic.isSameSize(m_frameWidth, m_frameHeight)) {
-        //         m_frameWidth = pic.getWidth();
-        //         m_frameHeight = pic.getHeight();
-        //         m_frameRate = static_cast<double>(m_frameHeight) / static_cast<double>(m_frameWidth);
-        //         emit frameSizeChanged();
-        //     }
-        // }
+        if (m_renderer->setVideoFrame(pic)) {
+            // make dirty
+            this->update();
+            if (!pic.isSameSize(m_frameWidth, m_frameHeight)) {
+                m_frameWidth = pic.getWidth();
+                m_frameHeight = pic.getHeight();
+                m_frameRate = static_cast<double>(m_frameHeight) / static_cast<double>(m_frameWidth);
+                emit frameSizeChanged();
+            }
+        }
         // qDebug() << "received a new frame, format: " << pic.m_videoFrame->m_frame->format;
-        if (static_cast<const VideoFrameRef &>(mainSettings.videoFrame) == pic)
-        {
-                qDebug() << "received a new frame, but is same";
-            return;
-        }
-        {
-            // qDebug() << "new frame address: " << static_cast<void*>(pic.m_videoFrame);
-            // qDebug() << "old frame in mainSettings: " << static_cast<void*>(mainSettings.videoFrame.m_value.m_videoFrame);
-            mainSettings.videoFrame = pic;
-            // qDebug() << "new frame in mainSettings: " << static_cast<void*>(mainSettings.videoFrame.m_value.m_videoFrame);
-        }
+        // if (static_cast<const VideoFrameRef &>(mainSettings.videoFrame) == pic)
+        // {
+        //         qDebug() << "received a new frame, but is same";
+        //     return;
+        // }
+        // {
+        //     // qDebug() << "new frame address: " << static_cast<void*>(pic.m_videoFrame);
+        //     // qDebug() << "old frame in mainSettings: " << static_cast<void*>(mainSettings.videoFrame.m_value.m_videoFrame);
+        //     mainSettings.videoFrame = pic;
+        //     // qDebug() << "new frame in mainSettings: " << static_cast<void*>(mainSettings.videoFrame.m_value.m_videoFrame);
+        // }
 
-        this->update();
-        if (!pic.isSameSize(m_frameWidth, m_frameHeight)) {
-            m_frameWidth = pic.getWidth();
-            m_frameHeight = pic.getHeight();
-            m_frameRate = static_cast<double>(m_frameHeight) / static_cast<double>(m_frameWidth);
-            emit frameSizeChanged();
-        }
+        // this->update();
+        // if (!pic.isSameSize(m_frameWidth, m_frameHeight)) {
+        //     m_frameWidth = pic.getWidth();
+        //     m_frameHeight = pic.getHeight();
+        //     m_frameRate = static_cast<double>(m_frameHeight) / static_cast<double>(m_frameWidth);
+        //     emit frameSizeChanged();
+        // }
     }
 
     /**
