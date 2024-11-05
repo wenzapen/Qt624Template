@@ -146,7 +146,7 @@ public:
         if (!(frameBuf = av_frame_alloc()) || !(cpuFrame = av_frame_alloc())) {
             throw std::runtime_error("Cannot alloc frame buf.");
         }
-        // cpuFrame->format = AV_PIX_FMT_YUV420P;
+        cpuFrame->format = AV_PIX_FMT_RGB24;
     }
 
     ~DecoderContext() {
@@ -176,6 +176,7 @@ private:
                 if (config->methods & AV_CODEC_HW_CONFIG_METHOD_HW_DEVICE_CTX &&
                     config->device_type == deviceType) {
                     hwPixFmt = config->pix_fmt;
+                    qDebug() << "hwPixFmt: " << hwPixFmt;
                     break;
                 }
             }

@@ -39,6 +39,7 @@ public:
                         return false;
                     }
                     cpuFrame->pts = frameBuf->pts;
+                    qDebug() << "cpuFrame format: "<< cpuFrame->format;
 
                     if (!frameQueue->push(cpuFrame)) {
                         qDebug() << "push failure";
@@ -48,8 +49,8 @@ public:
                         return false;
                     }
                     cpuFrame = av_frame_alloc();
-                    // cpuFrame->format = AV_PIX_FMT_YUV420P;
-
+                    // cpuFrame->format = AV_PIX_FMT_RGB24;
+                        //
                     // if (!frameQueue->push(frameBuf)) {
                     //     frameQueue->clear([](AVFrame *frame) { av_frame_free(&frame); });
                     //     av_frame_unref(frameBuf);
@@ -66,6 +67,8 @@ public:
                         return false;
                     }
                     // qDebug() << "SW decode sucesss";
+                    qDebug() << "SwFrame format: "<< frameBuf->format;
+
                     frameBuf = av_frame_alloc();
                 }
 

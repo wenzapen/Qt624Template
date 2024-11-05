@@ -188,7 +188,8 @@ public slots:
         program->setUniformValue("tex_y", 0);
         program->setUniformValue("tex_u", 1);
         program->setUniformValue("tex_v", 2);
-        program->setUniformValue("tex_lut", 3);
+        program->setUniformValue("tex_lut", 4);
+        program->setUniformValue("tex_uv", 3);
         glEnable(GL_TEXTURE_2D);
         glActiveTexture(GL_TEXTURE0);
         createTextureBuffer(&textureY);
@@ -250,6 +251,9 @@ public:
         // Due to QTBUG-97589, we are not able to get model-view matrix
         // https://bugreports.qt.io/browse/QTBUG-97589
         // workaround, assume parent clip hurricane
+        glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
         const QRect r = state->scissorRect();
 
         glEnable(GL_BLEND);
@@ -284,6 +288,10 @@ public:
         {
             return;
         }
+
+        int frameFormat = videoFrame.getFrame()->getAVFrame()->format;
+        program->setUniformValue("format", frameFormat);
+
         int lineSize = videoFrame.getLineSize();
         int imageHeight = videoFrame.getHeight();
         int imageWidth = videoFrame.getWidth();

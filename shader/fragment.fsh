@@ -2,10 +2,12 @@
 uniform sampler2D tex_y;
 uniform sampler2D tex_u;
 uniform sampler2D tex_v;
+uniform sampler2D tex_uv;
 uniform sampler2D tex_lut;
 uniform float brightness;
 uniform float contrast;
 uniform float saturation;
+uniform int      format = -1;    // 像素格式
 
 in vec2 TexCoord;
 out vec4 FragColor;
@@ -97,10 +99,27 @@ mat4 saturationMatrix(float saturation) {
 void main(void) {
     vec3 yuv;
     vec3 rgb;
-    yuv.x = texture(tex_y, TexCoord).r;
-    yuv.y = texture(tex_u, TexCoord).r - 0.5;
-    yuv.z = texture(tex_v, TexCoord).r - 0.5;
+    // yuv.x = texture(tex_y, TexCoord).r;
+    // yuv.y = texture(tex_u, TexCoord).r - 0.5;
+    // yuv.z = texture(tex_v, TexCoord).r - 0.5;
+    if(format == 0)           // YUV420P转RGB
+    {
+        yuv.x = texture(tex_y, TexCoord).r;
+        yuv.y = texture(tex_u, TexCoord).r-0.5;
+        yuv.z = texture(tex_v, TexCoord).r-0.5;
+    }
+    else if(format == 23)     // NV12转RGB
+    {
+        yuv.x = texture(tex_y, TexCoord.st).r;
+        yuv.y = texture(tex_uv, TexCoord.st).r - 0.5;
+        yuv.z = texture(tex_uv, TexCoord.st).g - 0.5;
+    }
+    else
+    {
+    }
+
     rgb = YUV_RGB_TRANSFORM * yuv;
     FragColor = brightnessMatrix(brightness) * contrastMatrix(contrast) * saturationMatrix(saturation) * vec4(rgb, 1);
     FragColor = lutFilter(FragColor);
+    // FragColor = vec4(rgb, 1.0)
 }
